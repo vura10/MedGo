@@ -31,7 +31,7 @@ const AuthPage = () => {
       {/* Logo and Name */}
       {/* <div className="absolute top-4 left-4 flex items-center">
         <img src={logo} alt="MedgoPlus Logo" className="h-12 w-auto mr-2" />
-        <h1 className="text-2xl font-bold text-primary">MedgoPlus</h1>
+        <h1 className="text-2xl font-bold text-primary">Medgo Plus</h1>
       </div> */}
 
       {/* Centered Login Form */}
