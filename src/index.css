@@ -1,13 +1,10 @@
 @import "tailwindcss";
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 @layer base {
   :root {
     --color-primary: #2e8d83; /* Teal from the house */
     --color-secondary: #FFFFFF; /* White from the cross */
+    --color-active: #46e2d3;
     --color-accent: #e8f1f1; /* Light gray background */
     --color-dark: #263238; /* Dark gray for contrast */
     --color-light: #ffffff; /* Very light gray for highlights */
@@ -40,7 +37,6 @@
   .btn-secondary:hover {
     background-color: #E0E0E0; /* Light gray hover */
   }
-
 }
 
 /* Utility classes for custom colors */
