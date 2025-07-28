@@ -52,8 +52,9 @@ const AuthPage = () => {
                 <Field
                   type="email"
                   name="email"
-                  className="w-full px-3 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary md:w-96"
-                />
+                  placeholder = "Enter Email"
+                  className="w-full px-3 py-2 text-sm font-thin border border-gray-300 rounded-full focus:outline-none focus:ring-0 focus:ring-active md:w-96"
+                  />
                 <ErrorMessage
                   name="email"
                   component="div"
@@ -62,32 +63,33 @@ const AuthPage = () => {
               </div>
 
               <div className="relative w-full md:w-96">
-  <label htmlFor="password" className="block text-dark text-sm font-medium mb-1">
-    Password
-  </label>
+                <label htmlFor="password" className="block text-dark text-sm font-medium mb-1">
+                  Password
+                </label>
 
-  <div className="relative">
-    <Field
-      type={showPassword ? 'text' : 'password'}
-      name="password"
-      className="w-full px-3 py-2 pr-10 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-primary"
-    />
-    <button
-      type="button"
-      onClick={() => setShowPassword(!showPassword)}
-      className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-primary focus:outline-none focus:ring-0"
-      tabIndex={-1}
-    >
-      {showPassword ? <FaEyeSlash /> : <FaEye />}
-    </button>
-  </div>
+                <div className="relative">
+                  <Field
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    placeholder = "Enter Password"
+                    className="w-full px-3 py-2 pr-10 text-sm placeholder:text-sm font-thin border border-gray-300 rounded-full focus:outline-none focus:ring-0 focus:ring-primary"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-primary focus:outline-none focus:ring-0"
+                    tabIndex={-1}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </button>
+                </div>
 
-  <ErrorMessage
-    name="password"
-    component="div"
-    className="text-red-500 text-xs mt-1"
-  />
-</div>
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-500 text-xs mt-1"
+                />
+              </div>
 
               <button
                 type="submit"
