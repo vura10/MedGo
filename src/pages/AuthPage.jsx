@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import logo from '../../public/AppIcon-29@2x.png';
+import logo from '../../public/AppIcon-29_2x.png';
 
 const AuthPage = () => {
   const initialValues = {
@@ -30,7 +30,7 @@ const AuthPage = () => {
     <div className="min-h-screen bg-accent flex flex-col items-center justify-center p-4">
       {/* Logo and Name */}
       {/* <div className="absolute top-4 left-4 flex items-center">
-        <img src={logo} alt="MedgoPlus Logo" className="h-12 w-auto mr-2" />
+        <img src={logo} alt="MedgoPlus Logo" className="h-12 w-auto mr-1" />
         <h1 className="text-2xl font-bold text-primary">Medgo Plus</h1>
       </div> */}
 
