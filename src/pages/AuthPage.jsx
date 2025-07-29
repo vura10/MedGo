@@ -2,29 +2,41 @@ import React, { useState } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import logo from '../../public/AppIcon-29_2x.png';
+import { useNavigate } from 'react-router-dom';
+import Loading from '../components/Loading';
 
 const AuthPage = () => {
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
+  const navigate = useNavigate();
   const initialValues = {
-    email: '',
+    username: '',
     password: '',
   };
 
+  
+
   const validationSchema = Yup.object({
-    email: Yup.string()
-      .email('Invalid email address')
-      .required('Email is required'),
+    username: Yup.string() // Changed from email
+      .min(3, 'Username must be at least 3 characters')
+      .matches(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores')
+      .required('Username is required'),
     password: Yup.string()
       .min(6, 'Password must be at least 6 characters')
       .required('Password is required'),
   });
 
-  const onSubmit = (values) => {
-    console.log('Form data', values);
-    // Handle login logic here (e.g., API call)
+  const onSubmit = (values, { setSubmitting }) => {
+    setIsLoading(true); // Start loading
+    setTimeout(() => {
+      console.log('Form data', values);
+      navigate('/home'); // Navigate to dashboard
+      setIsLoading(false); // Stop loading
+      setSubmitting(false);
+    }, 1000); // Mock delay
   };
-
-  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className="min-h-screen bg-accent flex flex-col items-center justify-center p-4">
@@ -46,17 +58,17 @@ const AuthPage = () => {
           {({ isSubmitting }) => (
             <Form className="space-y-4">
               <div>
-                <label htmlFor="email" className="block text-dark text-sm font-medium mb-1">
-                  Email
+                <label htmlFor="username" className="block text-dark text-sm font-medium mb-1">
+                  Username
                 </label>
                 <Field
-                  type="email"
-                  name="email"
-                  placeholder = "Enter Email"
+                  type="text" 
+                  name="username" 
+                  placeholder="Enter Username"
                   className="w-full px-3 py-2 text-sm font-thin border border-gray-300 rounded-full focus:outline-none focus:ring-0 focus:ring-active md:w-96"
-                  />
+                />
                 <ErrorMessage
-                  name="email"
+                  name="username" 
                   component="div"
                   className="text-red-500 text-xs mt-1"
                 />
@@ -93,10 +105,10 @@ const AuthPage = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || isLoading}
                 className="w-full bg-primary cursor-pointer text-secondary py-2 rounded-full hover:opacity-80 transition-opacity duration-200"
               >
-                Login
+                {isLoading ? <Loading size="h-5 w-5" /> : 'Login'}
               </button>
             </Form>
           )}
