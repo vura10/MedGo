@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
+import Logo from '/AppIcon-29_2x.png';
 
 const AuthPage = () => {
 
@@ -42,12 +43,12 @@ const AuthPage = () => {
     <div className="min-h-screen bg-accent flex flex-col items-center justify-center p-4">
       {/* Logo and Name */}
       {/* <div className="absolute top-4 left-4 flex items-center">
-        <img src={logo} alt="MedgoPlus Logo" className="h-12 w-auto mr-1" />
+        <img src={Logo} alt="MedgoPlus Logo" className="h-12 w-auto mr-1" />
         <h1 className="text-2xl font-bold text-primary">Medgo Plus</h1>
       </div> */}
 
       {/* Centered Login Form */}
-      <div className="bg-light p-9 rounded-lg shadow-lg w-full max-w-md">
+      <div className="bg-secondary p-9 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-bold text-primary text-center mb-4">Admin</h2>
         <h2 className="text-2xl font-medium text-dark  mb-4">Login</h2>
         <Formik
