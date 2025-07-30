@@ -2,7 +2,7 @@
 
 @layer base {
   :root {
-    --color-primary: #2e8d83; /* Teal from the house */
+    --color-primary: #39b1a5; /* Teal from the house */
     --color-secondary: #FFFFFF; /* White from the cross */
     --color-accent: #e8f1f1; /* Light gray background */
     --color-dark: #263238; /* Dark gray for contrast */
