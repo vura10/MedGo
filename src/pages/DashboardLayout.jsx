@@ -1,5 +1,6 @@
+// src/pages/DashboardLayout.js
+import { Outlet } from "react-router-dom";
 import Navbar from "../components/Navbar";
-import Dashboard from "../components/Dashboard";
 import Sidebar from "../components/SideBar/Sidebar";
 
 const DashboardLayout = () => {
@@ -9,7 +10,7 @@ const DashboardLayout = () => {
       <div className="flex">
         <Sidebar />
         <main className="flex-1 p-6">
-          <Dashboard />
+          <Outlet />
         </main>
       </div>
     </div>
