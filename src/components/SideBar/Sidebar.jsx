@@ -1,6 +1,7 @@
-// src/components/Sidebar.jsx
-import SidebarDropdown from "./SidebarDropdown";
 import sidebarItems from "../../data/sidebarItems";
+import SidebarDropdown from "./SidebarDropdown";
+import { NavLink } from "react-router-dom";
+import clsx from "clsx";
 
 const Sidebar = () => {
   return (
@@ -8,18 +9,25 @@ const Sidebar = () => {
       <ul className="space-y-4">
         {sidebarItems.map((item, index) =>
           item.type === "link" ? (
-            <li
+            <NavLink
               key={index}
-              className="flex items-center gap-2 hover:bg-blue-500 p-2 rounded cursor-pointer"
+              to={item.path}
+              className={({ isActive }) =>
+                clsx(
+                  "flex items-center gap-2 hover:bg-blue-500 p-2 rounded",
+                  isActive && "bg-blue-600"
+                )
+              }
             >
               {item.icon && <item.icon />} {item.title}
-            </li>
+            </NavLink>
           ) : (
             <SidebarDropdown
               key={index}
               title={item.title}
               icon={item.icon}
               items={item.items}
+              basePath={item.basePath}
             />
           )
         )}
