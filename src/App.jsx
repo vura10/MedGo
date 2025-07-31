@@ -14,6 +14,7 @@ function App() {
         <Route path="/home" element={<DashboardLayout />}>
 
           <Route index element={<Dashboard />} />
+          <Route path="dashboard" element={<Dashboard />} />
           {sidebarItems
             .filter(section => section.basePath && section.items.some(item => item.path && item.element))
             .map((section, index) =>

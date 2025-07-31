@@ -19,8 +19,16 @@ import AccountStatus from '../components/Users/AccountStatus';
 import DoctorRatings from '../components/Users/DoctorRatings';
 import BookingHistory from '../components/Users/BookingHistory';
 import TotalConsulation from '../components/Consultation/TotalConsulation';
+import Dashboard from "../components/Dashboard";
 
 const sidebarItems = [
+  {
+    title: "Dashboard",
+    icon: FaTachometerAlt,
+    type: "link", 
+    path: "dashboard",
+    element: <Dashboard />,
+  },
   {
     title: "User Management",
     icon: FaUsers,
