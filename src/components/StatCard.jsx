@@ -57,7 +57,7 @@ const StatCard = ({ title, value }) => {
     <div className="bg-white rounded-2xl shadow-md p-6 flex justify-between items-center hover:shadow-lg transition-transform hover:scale-[1.02] cursor-pointer">
       <div>
         <p className="text-lg text-gray-500 font-medium">{title}</p>
-        <h3 className="text-2xl font-bold text-gray-700 mt-1">{displayValue}</h3>
+        <h3 className="text-1xl font-bold text-gray-700 mt-1">{displayValue}</h3>
       </div>
       <div className="bg-primary rounded-full p-3 flex items-center justify-center">
         {iconMap[title]}
