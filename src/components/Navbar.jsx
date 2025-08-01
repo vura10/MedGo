@@ -17,11 +17,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full bg-white shadow px-6 py-4 flex justify-between items-center">
+    <nav className="w-full bg-white shadow px-6 py-2 flex justify-between items-center">
       {/* <img
         src={AppIcon}
         alt="Admin Logo"
-        className="h-10 w-auto"
+        className="h-12 w-auto"
       /> */}
 
       <div className="flex items-center gap-4 relative">
