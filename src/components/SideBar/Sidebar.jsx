@@ -14,7 +14,7 @@ const Sidebar = () => {
               to={item.path}
               className={({ isActive }) =>
                 clsx(
-                  "flex items-center hover:bg-[var(--color-light)] transition-colors duration-200 ease-in-out p-2 rounded cursor-pointer",
+                  "flex gap-4 items-center hover:bg-[var(--color-light)] transition-colors duration-200 ease-in-out p-2 rounded cursor-pointer",
                   isActive && "bg-primary"
                 )
               }
