@@ -18,11 +18,11 @@ const Navbar = () => {
 
   return (
     <nav className="w-full bg-white shadow px-6 py-4 flex justify-between items-center">
-      <img
+      {/* <img
         src={AppIcon}
         alt="Admin Logo"
         className="h-10 w-auto"
-      />
+      /> */}
 
       <div className="flex items-center gap-4 relative">
         <p className="text-gray-700">
