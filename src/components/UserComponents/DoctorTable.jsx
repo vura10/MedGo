@@ -98,7 +98,7 @@ const DoctorTable = () => {
                 <td className="px-4 py-2">{doc.city}</td>
                 <td className="px-4 py-2 space-x-2">
                   <button
-                    className="cursor-pointer bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    className="cursor-pointer bg-primary text-white px-3 py-1 rounded hover:bg-accent"
                     onClick={() =>
                       setModalData({
                         open: true,
@@ -110,7 +110,7 @@ const DoctorTable = () => {
                     Onboard
                   </button>
                   <button
-                    className="cursor-pointer bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    className="cursor-pointer bg-black text-white px-3 py-1 rounded "
                     onClick={() =>
                       setModalData({
                         open: true,
