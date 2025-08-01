@@ -44,9 +44,9 @@ const DoctorTable = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr className="bg-gray-100 text-sm text-gray-600 text-left">
-            <th className="px-4 py-2">Doc Mobile Num</th>
-            <th className="px-4 py-2">Doc Name</th>
-            <th className="px-4 py-2">Doc Verification Status</th>
+            <th className="px-4 py-2">Doctor Mobile Num</th>
+            <th className="px-4 py-2">Doctor Name</th>
+            <th className="px-4 py-2">Doctor Verification Status</th>
             <th className="px-4 py-2">City</th>
             <th className="px-4 py-2">Action</th>
           </tr>
@@ -55,7 +55,7 @@ const DoctorTable = () => {
               <input
                 type="text"
                 placeholder="Search Mobile"
-                className="w-full border border-gray-300 rounded px-2 py-1"
+                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.mobile}
                 onChange={(e) => handleSearchChange('mobile', e.target.value)}
               />
@@ -64,7 +64,7 @@ const DoctorTable = () => {
               <input
                 type="text"
                 placeholder="Search Name"
-                className="w-full border border-gray-300 rounded px-2 py-1"
+                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.name}
                 onChange={(e) => handleSearchChange('name', e.target.value)}
               />
@@ -74,7 +74,7 @@ const DoctorTable = () => {
               <input
                 type="text"
                 placeholder="Search City"
-                className="w-full border border-gray-300 rounded px-2 py-1"
+                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.city}
                 onChange={(e) => handleSearchChange('city', e.target.value)}
               />
@@ -98,7 +98,7 @@ const DoctorTable = () => {
                 <td className="px-4 py-2">{doc.city}</td>
                 <td className="px-4 py-2 space-x-2">
                   <button
-                    className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
+                    className="cursor-pointer bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600"
                     onClick={() =>
                       setModalData({
                         open: true,
@@ -110,7 +110,7 @@ const DoctorTable = () => {
                     Onboard
                   </button>
                   <button
-                    className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
+                    className="cursor-pointer bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
                     onClick={() =>
                       setModalData({
                         open: true,
