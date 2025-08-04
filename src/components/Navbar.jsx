@@ -37,7 +37,7 @@ const Navbar = () => {
         >
           <button
             onClick={handleLogout}
-            className={`text-red-500 hover:text-red-700 text-xl transition-transform duration-500 ${
+            className={`cursor-pointer text-red-500 hover:text-red-700 text-xl transition-transform duration-500 ${
               isLoggingOut ? "rotate-180 scale-110" : ""
             }`}
           >
