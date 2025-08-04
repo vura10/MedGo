@@ -102,8 +102,70 @@ const DoctorTable = () => {
                     onClick={() =>
                       setModalData({
                         open: true,
-                        title: 'Onboard Doctor',
-                        content: `Do you want to onboard ${doc.name}?`,
+                        title: 'Doctor Onboard Approval',
+                        content: (
+                          <div className="space-y-4">
+                            {/* Name */}
+                            <div>
+                              <label className="block text-sm font-medium">Name</label>
+                              <input
+                                type="text"
+                                defaultValue={doc.name}
+                                className="w-full border border-gray-300 rounded px-2 py-1"
+                              />
+                            </div>
+
+                            {/* Mobile */}
+                            <div>
+                              <label className="block text-sm font-medium">Mobile</label>
+                              <input
+                                type="text"
+                                defaultValue={doc.mobile}
+                                className="w-full border border-gray-300 rounded px-2 py-1"
+                              />
+                            </div>
+
+                            {/* Verification Status */}
+                            <div>
+                              <label className="block text-sm font-medium">Verification Status</label>
+                              <select
+                                defaultValue={doc.status}
+                                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
+                              >
+                                <option value="Verified">Verified</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Rejected">Rejected</option>
+                              </select>
+                            </div>
+
+                            {/* Verification Document */}
+                            <div>
+                              <label className="block text-sm font-medium">Verification Document</label>
+                              <input
+                                type="file"
+                                accept=".pdf,.jpg,.jpeg,.png"
+                                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
+                              />
+                            </div>
+
+                            {/* Approval Comment */}
+                            <div>
+                              <label className="block text-sm font-medium">Approval Comment</label>
+                              <textarea
+                                placeholder="Write your comment..."
+                                className="w-full border border-gray-300 rounded px-2 py-3"
+                              />
+                            </div>
+
+                            {/* Submit Button */}
+                            <button
+                              className="bg-primary cursor-pointer text-white px-4 py-2 rounded hover:bg-green-600"
+                              onClick={() => alert(`Doctor ${doc.name} onboarded!`)}
+                            >
+                              Approve
+                            </button>
+                          </div>
+                        ),
                       })
                     }
                   >
