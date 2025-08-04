@@ -44,7 +44,7 @@ const DoctorTable = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr className="bg-gray-100 text-sm text-gray-600 text-left">
-            <th className="px-4 py-2">Doctor Mobile Num</th>
+            <th className="px-4 py-2">Doctor Mobile Number</th>
             <th className="px-4 py-2">Doctor Name</th>
             <th className="px-4 py-2">Doctor Verification Status</th>
             <th className="px-4 py-2">City</th>
