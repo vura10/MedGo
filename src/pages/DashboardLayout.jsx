@@ -33,7 +33,7 @@ const DashboardLayout = () => {
         {!isSidebarOpen && (
           <button
             onClick={() => setIsSidebarOpen(true)}
-            className="cursor-pointer absolute top-20 left-4 z-40 bg-white p-2 rounded shadow lg:hidden"
+            className="cursor-pointer absolute top-15 left-3 z-40 bg-white p-2 rounded shadow lg:hidden"
           >
             <FaBars size={15} />
           </button>
