@@ -1,42 +1,53 @@
 import React, { useState, useEffect } from 'react';
-import { mockDoctors } from '../../data/mockDoctors'; 
+import { getDoctorRegistrations } from '../../Apis/doctorApi';
 import DoctorModal from './DoctorModal';
 
 const DoctorTable = () => {
-  const [filters, setFilters] = useState({ mobile: '', name: '', city: '' });
-  const [modalData, setModalData] = useState({ open: false, title: '', content: '' });
-
+  const [filters, setFilters] = useState({ mobile: "", name: "", city: "" });
+  const [modalData, setModalData] = useState({ open: false, title: "", content: "" });
   const [doctors, setDoctors] = useState([]);
 
-  // In future, fetch doctor list from backend API here
   useEffect(() => {
-    // Uncomment and update the below function to fetch from backend
-    /*
-    const fetchDoctorsFromAPI = async () => {
+    async function fetchDoctors() {
       try {
-        const response = await fetch('https://your-api.com/doctors');
-        const data = await response.json();
-        setDoctors(data);
-      } catch (error) {
-        console.error('Error fetching doctors:', error);
-      }
-    };
+        const data = await getDoctorRegistrations();
 
-    fetchDoctorsFromAPI();
-    */
-    
-    // Temporary: Using local mock data for now
-    setDoctors(mockDoctors);
+        // Map API fields to the ones your table expects
+        const mapped = data.map((doc, index) => {
+          const verificationValue = String(doc.doctor_isverified).toLowerCase();
+          const isVerified =
+            verificationValue === "1" ||
+            verificationValue === "true" ||
+            verificationValue === "verified";
+
+          return {
+            id: index + 1,
+            name: doc.doctor_name,
+            mobile: doc.doctor_mobile_number,
+            status: isVerified ? "Verified" : "Pending",
+            city: doc.city
+          };
+        });
+
+
+        setDoctors(mapped);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
+    }
+    fetchDoctors();
   }, []);
+
 
   const handleSearchChange = (field, value) => {
     setFilters({ ...filters, [field]: value });
   };
 
-  const filteredDoctors = doctors.filter((doc) =>
-    doc.mobile.includes(filters.mobile) &&
-    doc.name.toLowerCase().includes(filters.name.toLowerCase()) &&
-    doc.city.toLowerCase().includes(filters.city.toLowerCase())
+  const filteredDoctors = doctors.filter(
+    (doc) =>
+      doc.mobile?.includes(filters.mobile) &&
+      doc.name?.toLowerCase().includes(filters.name.toLowerCase()) &&
+      doc.city?.toLowerCase().includes(filters.city.toLowerCase())
   );
 
   return (
@@ -44,8 +55,8 @@ const DoctorTable = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr className="bg-gray-100 text-sm text-gray-600 text-left">
+            <th className="px-4 py-2">Doctor Name</th>            
             <th className="px-4 py-2">Doctor Mobile Number</th>
-            <th className="px-4 py-2">Doctor Name</th>
             <th className="px-4 py-2">Doctor Verification Status</th>
             <th className="px-4 py-2">City</th>
             <th className="px-4 py-2">Action</th>
@@ -54,19 +65,19 @@ const DoctorTable = () => {
             <th className="px-4 py-2">
               <input
                 type="text"
-                placeholder="Search Mobile"
-                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
-                value={filters.mobile}
-                onChange={(e) => handleSearchChange('mobile', e.target.value)}
-              />
-            </th>
-            <th className="px-4 py-2">
-              <input
-                type="text"
                 placeholder="Search Name"
                 className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.name}
                 onChange={(e) => handleSearchChange('name', e.target.value)}
+              />
+            </th>            
+            <th className="px-4 py-2">
+              <input
+                type="text"
+                placeholder="Search Mobile"
+                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
+                value={filters.mobile}
+                onChange={(e) => handleSearchChange('mobile', e.target.value)}
               />
             </th>
             <th></th>
@@ -91,9 +102,9 @@ const DoctorTable = () => {
             </tr>
           ) : (
             filteredDoctors.map((doc) => (
-              <tr key={doc.id} className="hover:bg-gray-50">
-                <td className="px-4 py-2">{doc.mobile}</td>
+              <tr key={doc.id} className="hover:bg-gray-50">                
                 <td className="px-4 py-2">{doc.name}</td>
+                <td className="px-4 py-2">{doc.mobile}</td>
                 <td className="px-4 py-2">{doc.status}</td>
                 <td className="px-4 py-2">{doc.city}</td>
                 <td className="px-4 py-2 space-x-2">
