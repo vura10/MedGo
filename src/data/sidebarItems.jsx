@@ -13,13 +13,22 @@ import {
 } from "react-icons/fa";
 import { MdInsights } from "react-icons/md";
 
+import Dashboard from "../components/Dashboard";
+
+//Users Imports
 import DoctorOnboarding from "../components/Users/DoctorOnboarding";
 import ViewUsers from "../components/Users/ViewUsers";
 import AccountStatus from '../components/Users/AccountStatus';
 import DoctorRatings from '../components/Users/DoctorRatings';
 import BookingHistory from '../components/Users/BookingHistory';
+
+//Consulation Managements Imports
 import TotalConsulation from '../components/Consultation/TotalConsulation';
-import Dashboard from "../components/Dashboard";
+
+
+//Revenue And Payments Imports
+import DocPayout from "../components/Payments/DocPayout";
+
 
 const sidebarItems = [
   {
@@ -62,9 +71,11 @@ const sidebarItems = [
     items: [
       { name: "Revenue breakdown" },
       { name: "Real-time revenue dashboard" },
-      { name: "Doctor payout calculation and release module" },
+      { name: "Doctor payout calculation and release module", path: "doctors-payout", element: <DocPayout /> },
       { name: "Payment history logs" },
       { name: "Transactions, refunds" },
+      { name: "Doctor commissions" },
+      { name: "GST" },
     ],
   },
   {
