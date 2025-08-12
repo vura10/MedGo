@@ -45,12 +45,22 @@ const Dashboard = () => {
     fetchStats();
   }, []);
 
-  if (loading) return <p className="p-7">Loading...</p>;
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-100">
+        <p className="text-sm sm:text-base md:text-lg text-gray-700 p-4 sm:p-6 md:p-8">
+          Loading...
+        </p>
+      </div>
+    );
+  }
 
   return (
-    <div className="p-7">
-      <h1 className="text-2xl font-bold text-gray-800 mb-6">Dashboard</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="p-4 sm:p-6 md:p-8 min-h-screen bg-gray-100">
+      <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
+        Dashboard
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {stats.map((stat, index) => (
           <StatCard key={index} title={stat.title} value={stat.value} />
         ))}
