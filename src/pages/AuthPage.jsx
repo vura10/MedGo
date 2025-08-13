@@ -94,7 +94,7 @@ const AuthPage = () => {
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-0"
+                      className="cursor-pointer absolute inset-y-0 right-3 flex items-center text-gray-500 hover:text-blue-600 focus:outline-none focus:ring-0"
                       tabIndex={-1}
                     >
                       {showPassword ? <FaEyeSlash /> : <FaEye />}

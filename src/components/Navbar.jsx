@@ -21,7 +21,7 @@ const Navbar = ({ isSidebarOpen, setIsSidebarOpen }) => {
       <div className="flex items-center gap-2">
         <button
           onClick={() => setIsSidebarOpen((prev) => !prev)}
-          className="lg:hidden text-gray-700 text-xl p-1"
+          className="cursor-pointer lg:hidden text-gray-700 text-xl p-1"
         >
           <FaBars />
         </button>
