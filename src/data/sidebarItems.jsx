@@ -1,4 +1,3 @@
-// src/data/sidebarItems.js
 import {
   FaTachometerAlt,
   FaUsers,
