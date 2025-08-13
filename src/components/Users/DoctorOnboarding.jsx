@@ -1,5 +1,5 @@
 import React from 'react'
-import DoctorTable from '../UserComponents/DoctorTable';
+import DoctorTable from './UserComponents/DoctorTable'; 
 
 const DoctorOnboarding =  () => {
   return (
