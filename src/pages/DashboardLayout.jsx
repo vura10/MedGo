@@ -7,6 +7,7 @@ import clsx from "clsx";
 
 const DashboardLayout = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [selectedPath, setSelectedPath] = useState("");
 
   // Handle responsive sidebar toggle
   useEffect(() => {
@@ -24,15 +25,31 @@ const DashboardLayout = () => {
   <div className="flex flex-1">
     {isSidebarOpen && (
       <div className="fixed lg:static top-0 left-0 z-40">
-        <Sidebar onClose={() => setIsSidebarOpen(false)} />
+        <Sidebar 
+          onClose={() => setIsSidebarOpen(false)}
+          onSelectPath = {(parent, child) => setSelectedPath(`${parent} -> ${child}`)} />
       </div>
     )}
     <main
       className={clsx(
         "flex-1 p-4 sm:p-6 md:p-1 transition-all duration-300",
-        isSidebarOpen ? "lg:ml-2" : "ml-0"
+        isSidebarOpen ? "lg:ml-1" : "ml-0"
       )}
     >
+
+      {/* Breadcrumb Display */}
+      {selectedPath && (
+        <div className="mb-4 ml-6 text-sm text-gray-500 font-medium">
+          <div className="mb-4 text-sm text-gray-600">
+            {selectedPath.split(" / ").map((p, i, arr) => (
+              <span key={i}>
+                {p}
+                {i < arr.length - 1 && <span className="mx-2">/</span>}
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
       <Outlet />
     </main>
   </div>
