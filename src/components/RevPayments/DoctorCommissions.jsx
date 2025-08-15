@@ -19,7 +19,8 @@ const DoctorCommissions = () => {
           phone: item.doctor_details.doctor_phonenumber,
           name: item.doctor_details.doctor_name,
           commissionRate: item.commission_details.commission_rate,
-          specialCommissionRate: item.commission_details.special_commission_rate,
+          specialCommissionRate:
+            item.commission_details.special_commission_rate,
         }));
         setDoctors(transformed);
       } catch (error) {
