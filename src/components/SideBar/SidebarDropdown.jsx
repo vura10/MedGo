@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { FiChevronDown } from "react-icons/fi";
 import clsx from "clsx";
 
-const SidebarDropdown = ({ title, icon: Icon, items, basePath }) => {
+const SidebarDropdown = ({ title, icon: Icon, items, basePath, onSelectPath }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -34,6 +34,12 @@ const SidebarDropdown = ({ title, icon: Icon, items, basePath }) => {
                     isActive && "bg-[var(--color-light)] text-white"
                   )
                 }
+
+                onClick={() => {
+                  if(typeof onSelectPath === "function") {
+                    onSelectPath(title, item.name);
+                  }
+                }}
               >
                 {item.name}
               </NavLink>
