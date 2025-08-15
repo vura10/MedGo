@@ -26,8 +26,8 @@ import TotalConsulation from '../components/Consultation/TotalConsulation';
 
 
 //Revenue And Payments Imports
-import DocPayout from "../components/Payments/DocPayout";
-
+import DocPayout from "../components/RevPayments/DocPayout" 
+import DoctorCommissions from "../components/RevPayments/DoctorCommissions";
 
 const sidebarItems = [
   {
@@ -45,7 +45,7 @@ const sidebarItems = [
     items: [
       { name: "View/search/filter patients & doctors", path: "view", element: <ViewUsers /> },
       { name: "Doctor onboarding approval", path: "doctor-onboarding", element: <DoctorOnboarding /> },
-      { name: "Activate / deactivate accounts", path: "account-status", element: <AccountStatus /> },
+      { name: "Activate & deactivate accounts", path: "account-status", element: <AccountStatus /> },
       { name: "View doctor ratings & feedback", path: "doctor-ratings", element: <DoctorRatings /> },
       { name: "View patient booking history", path: "booking-history", element: <BookingHistory /> },
     ],
@@ -70,10 +70,10 @@ const sidebarItems = [
     items: [
       { name: "Revenue breakdown" },
       { name: "Real-time revenue dashboard" },
-      { name: "Doctor payout calculation and release module", path: "doctors-payout", element: <DocPayout /> },
+      { name: "Doctor payout calculations", path: "doctors-payout", element: <DocPayout /> },
       { name: "Payment history logs" },
       { name: "Transactions, refunds" },
-      { name: "Doctor commissions" },
+      { name: "Doctor commissions", path: "doctors-commissions", element: <DoctorCommissions /> },
       { name: "GST" },
     ],
   },
