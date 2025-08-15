@@ -8,35 +8,34 @@ const DoctorTable = () => {
   const [doctors, setDoctors] = useState([]);
 
   useEffect(() => {
-    async function fetchDoctors() {
-      try {
-        const data = await getDoctorRegistrations();
+  async function fetchDoctors() {
+    try {
+      const data = await getDoctorRegistrations({
+        doctor_name: filters.name,
+        mobile_number: filters.mobile,
+        city: filters.city
+      });
 
-        // Map API fields to the ones your table expects
-        const mapped = data.map((doc, index) => {
-          const verificationValue = String(doc.doctor_isverified).toLowerCase();
-          const isVerified =
-            verificationValue === "1" ||
-            verificationValue === "true" ||
-            verificationValue === "verified";
+      const mapped = data.map((doc, index) => ({
+        id: index + 1,
+        name: doc.doctor_name,
+        mobile: doc.doctor_mobile_number,
+        status: String(doc.doctor_isverified) === "1" ? "Verified" : "Pending",
+        city: doc.city
+      }));
 
-          return {
-            id: index + 1,
-            name: doc.doctor_name,
-            mobile: doc.doctor_mobile_number,
-            status: isVerified ? "Verified" : "Pending",
-            city: doc.city
-          };
-        });
-
-
-        setDoctors(mapped);
-      } catch (error) {
-        console.error("Error fetching doctors:", error);
-      }
+      setDoctors(mapped);
+    } catch (error) {
+      console.error("Error fetching doctors:", error);
     }
+  }
+
+  // Only fetch if at least one filter has a value
+  if (filters.name || filters.mobile || filters.city) {
     fetchDoctors();
-  }, []);
+  }
+}, [filters]);
+
 
 
   const handleSearchChange = (field, value) => {
