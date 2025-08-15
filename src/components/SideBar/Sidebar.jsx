@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import clsx from "clsx";
 import { FaTimes } from "react-icons/fa";
 
-const Sidebar = ({ onClose }) => {
+const Sidebar = ({ onClose, onSelectPath }) => {
   // Check if the screen is mobile (≤768px)
   const isMobile = window.matchMedia("(max-width: 768px)").matches;
 
@@ -30,7 +30,12 @@ const Sidebar = ({ onClose }) => {
               isActive && "bg-primary"
             )
           }
-          onClick={() => isMobile && onClose()}
+          onClick={() => {
+            isMobile && onClose();
+            if(typeof onSelectPath === "function"){
+              onSelectPath(item.title, "");
+            } 
+          }}
         >
           {item.icon && <item.icon />} {item.title}
         </NavLink>
@@ -41,6 +46,14 @@ const Sidebar = ({ onClose }) => {
           icon={item.icon}
           items={item.items}
           basePath={item.basePath}
+          onSelectPath = {(parent, child) => {
+            if(onClose && isMobile) onClose();
+
+            // Pass to parent
+            if(typeof onSelectPath === "function") {
+              onSelectPath(parent, child);
+            }
+          }}
         />
       )
     )}
