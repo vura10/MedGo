@@ -15,4 +15,12 @@ async function fetchData(endpoint) {
   }
 }
 
-export const getDoctorRegistrations = () => fetchData('doctorregistrations');
+// doctorApi.js
+export const getDoctorRegistrations = (params = {}) => {
+  const filteredParams = Object.fromEntries(
+    Object.entries(params).filter(([_, value]) => value?.trim() !== "")
+  );
+
+  const query = new URLSearchParams(filteredParams).toString();
+  return fetchData(`doctorregistrations${query ? `?${query}` : ""}`);
+};
