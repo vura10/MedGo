@@ -4,6 +4,7 @@ import * as Yup from 'yup';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import Loading from '../components/Loading';
+import { login } from '../Apis/authApi';
 
 const AuthPage = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -25,14 +26,26 @@ const AuthPage = () => {
       .required('Password is required'),
   });
 
-  const onSubmit = (values, { setSubmitting }) => {
+  const onSubmit = async (values, { setSubmitting, setFieldError }) => {
     setIsLoading(true);
-    setTimeout(() => {
-      console.log('Form data', values);
-      navigate('/home');
-      setIsLoading(false);
-      setSubmitting(false);
-    }, 1000);
+
+    try {
+      // 👇 use the login() function from api/auth.js
+      const response = await login(values.username, values.password);
+
+      if (response.status === 1) {
+        console.log("Login successful:", response);
+        navigate("/home");
+      } else {
+        setFieldError("username", response.message || "Invalid username or password");
+      }
+    } catch (error) {
+      console.error("Login error:", error.message);
+      setFieldError("username", error.message || "Something went wrong");
+    }
+
+    setIsLoading(false);
+    setSubmitting(false);
   };
 
   return (
