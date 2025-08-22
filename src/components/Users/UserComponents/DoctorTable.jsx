@@ -1,42 +1,45 @@
 import React, { useState, useEffect } from 'react';
-import {getDoctorRegistrations} from '../../../Apis/doctorApi';
+import { getDoctorRegistrations } from '../../../Apis/doctorApi';
 import DoctorModal from './DoctorModal';
 
 const DoctorTable = () => {
-  const [filters, setFilters] = useState({ mobile: "", name: "", city: "" });
+  const [filters, setFilters] = useState({ mobile: "", name: "", city: "", status: "Pending" });
   const [modalData, setModalData] = useState({ open: false, title: "", content: "" });
   const [doctors, setDoctors] = useState([]);
 
+  const normalizeStatus = (input) => {
+    if (!input) return "pending"; // fallback default
+    return input.toLowerCase(); // pass as-is if already correct
+  };
+
+
   useEffect(() => {
-  async function fetchDoctors() {
-    try {
-      const data = await getDoctorRegistrations({
-        doctor_name: filters.name,
-        mobile_number: filters.mobile,
-        city: filters.city
-      });
+    async function fetchDoctors() {
+      try {
+        const data = await getDoctorRegistrations({
+          doctor_name: filters.name,
+          mobile_number: filters.mobile,
+          city: filters.city ? filters.city.trim().toLowerCase() : "",
+          verification_status: normalizeStatus(filters.status), // normalized status
+        });
 
-      const mapped = data.map((doc, index) => ({
-        id: index + 1,
-        name: doc.doctor_name,
-        mobile: doc.doctor_mobile_number,
-        status: String(doc.doctor_isverified) === "1" ? "Verified" : "Pending",
-        city: doc.city
-      }));
+        const mapped = data.map((doc, index) => ({
+          id: index + 1,
+          name: doc.doctor_name,
+          mobile: doc.doctor_mobile_number,
+          status: String(doc.doctor_isverified) === "1" ? "Verified" : "Pending",
+          city: doc.city,
+        }));
 
-      setDoctors(mapped);
-    } catch (error) {
-      console.error("Error fetching doctors:", error);
+        setDoctors(mapped);
+      } catch (error) {
+        console.error("Error fetching doctors:", error);
+      }
     }
-  }
 
-  // Only fetch if at least one filter has a value
-  if (filters.name || filters.mobile || filters.city) {
+    // always fetch (status has default "Pending")
     fetchDoctors();
-  }
-}, [filters]);
-
-
+  }, [filters]);
 
   const handleSearchChange = (field, value) => {
     setFilters({ ...filters, [field]: value });
@@ -54,7 +57,7 @@ const DoctorTable = () => {
       <table className="min-w-full divide-y divide-gray-200">
         <thead>
           <tr className="bg-gray-100 text-sm text-gray-600 text-left">
-            <th className="px-4 py-2">Doctor Name</th>            
+            <th className="px-4 py-2">Doctor Name</th>
             <th className="px-4 py-2">Doctor Mobile Number</th>
             <th className="px-4 py-2">Doctor Verification Status</th>
             <th className="px-4 py-2">City</th>
@@ -67,26 +70,36 @@ const DoctorTable = () => {
                 placeholder="Search Name"
                 className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.name}
-                onChange={(e) => handleSearchChange('name', e.target.value)}
+                onChange={(e) => handleSearchChange("name", e.target.value)}
               />
-            </th>            
+            </th>
             <th className="px-4 py-2">
               <input
                 type="text"
                 placeholder="Search Mobile"
                 className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.mobile}
-                onChange={(e) => handleSearchChange('mobile', e.target.value)}
+                onChange={(e) => handleSearchChange("mobile", e.target.value)}
               />
             </th>
-            <th></th>
+            <th className="px-4 py-2">
+              <select
+                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
+                value={filters.status}
+                onChange={(e) => setFilters({ ...filters, status: e.target.value })}
+              >
+                <option value="">All</option>
+                <option value="pending">Pending</option>
+                <option value="verified">Verified</option>
+              </select>
+            </th>
             <th className="px-4 py-2">
               <input
                 type="text"
                 placeholder="Search City"
                 className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
                 value={filters.city}
-                onChange={(e) => handleSearchChange('city', e.target.value)}
+                onChange={(e) => handleSearchChange("city", e.target.value)}
               />
             </th>
             <th></th>
@@ -101,7 +114,7 @@ const DoctorTable = () => {
             </tr>
           ) : (
             filteredDoctors.map((doc) => (
-              <tr key={doc.id} className="hover:bg-gray-50">                
+              <tr key={doc.id} className="hover:bg-gray-50">
                 <td className="px-4 py-2">{doc.name}</td>
                 <td className="px-4 py-2">{doc.mobile}</td>
                 <td className="px-4 py-2">{doc.status}</td>
@@ -118,34 +131,25 @@ const DoctorTable = () => {
                             {/* Name */}
                             <div>
                               <label className="block text-sm font-medium">Name</label>
-                              <input
-                                type="text"
-                                defaultValue={doc.name}
-                                className="w-full border border-gray-300 rounded px-2 py-1"
-                              />
+                              <p className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-100">
+                                {doc.name}
+                              </p>
                             </div>
 
                             {/* Mobile */}
                             <div>
                               <label className="block text-sm font-medium">Mobile</label>
-                              <input
-                                type="text"
-                                defaultValue={doc.mobile}
-                                className="w-full border border-gray-300 rounded px-2 py-1"
-                              />
+                              <p className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-100">
+                                {doc.mobile}
+                              </p>
                             </div>
 
                             {/* Verification Status */}
                             <div>
                               <label className="block text-sm font-medium">Verification Status</label>
-                              <select
-                                defaultValue={doc.status}
-                                className="cursor-pointer w-full border border-gray-300 rounded px-2 py-1"
-                              >
-                                <option value="Verified">Verified</option>
-                                <option value="Pending">Pending</option>
-                                <option value="Rejected">Rejected</option>
-                              </select>
+                              <p className="w-full border border-gray-300 rounded px-2 py-1 bg-gray-100">
+                                {doc.status}
+                              </p>
                             </div>
 
                             {/* Verification Document */}
